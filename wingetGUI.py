@@ -6,8 +6,9 @@ sg.theme("systemdefault")
 layout = [
     [sg.Text("Winget - Interface Gráfica", font=("Helvetica", 20))],
     [sg.Text("Instalar Software", font=("Helvetica", 15))],
-    [sg.Button("Instalar Google Chrome"), sg.Button("Instalar Visual Studio Code"), sg.Button(
-        "Instalar Adobe Acrobat Reader"), sg.Button("Instalar Virtualbox"), sg.Button("Instalar VLC")],
+    [sg.Button("Instalar Google Chrome"), sg.Button("Instalar Visual Studio Code"), sg.Button("Instalar Adobe Acrobat Reader"), sg.Button("Instalar Virtualbox"), sg.Button("Instalar VLC")],
+    [sg.Text("Instalar Outro Software", font=("Helvetica", 15))],
+    [sg.Input(key="-PACOTE-"), sg.Button("Instalar")],
     [sg.Text("Atualizações", font=("Helvetica", 15))],
     [sg.Button("Procurar Atualizações"), sg.Button("Instalar Atualizações")],
     [sg.Text("", key="-MENSAGEM-")]
@@ -59,5 +60,8 @@ while True:
 
     if event == "Instalar VLC":
         installApp("VLC media player")
+
+    if event == "Instalar":
+        installApp(values["-PACOTE-"])
 
 window.close()
