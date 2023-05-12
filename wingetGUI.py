@@ -1,10 +1,10 @@
+import os
+
 import PySimpleGUI as sg
-import subprocess
 
 sg.theme("systemdefault")
 
 layout = [
-    [sg.Text("Winget - Interface Gráfica", font=("Helvetica", 20))],
     [sg.Text("Instalar Software", font=("Helvetica", 15))],
     [sg.Button("Instalar Google Chrome"), sg.Button("Instalar Visual Studio Code"), sg.Button("Instalar Adobe Acrobat Reader"), sg.Button("Instalar Virtualbox"), sg.Button("Instalar VLC")],
     [sg.Text("Instalar Outro Software", font=("Helvetica", 15))],
@@ -16,7 +16,6 @@ layout = [
 
 window = sg.Window("Winget GUI", layout)
 
-
 def validarCodigo(codigo, sucesso, falha):
     if codigo == 0:
         window["-MENSAGEM-"].update(sucesso)
@@ -25,7 +24,7 @@ def validarCodigo(codigo, sucesso, falha):
 
 
 def installApp(aplicacao):
-    code = subprocess.call(["winget", "install", aplicacao, "--accept-package-agreements"])
+    code = os.system(f"winget install {aplicacao} --accept-pakage-agreements")
     validarCodigo(code, "Instalado com sucesso!", "Ocorreu um erro.")
 
 
@@ -35,16 +34,12 @@ while True:
         break
 
     if event == "Procurar Atualizações":
-        code = subprocess.call(["winget", "upgrade"])
-
-        validarCodigo(code, "Não há Atualizações Pendentes.",
-                      "Ocorreu um erro.")
+        code = os.system("winget upgrade")
+        validarCodigo(code, "Não há Atualizações Pendentes.", "Ocorreu um erro.")
 
     if event == "Instalar Atualizações":
-        code = subprocess.call(["winget", "upgrade", "--all"])
-
-        validarCodigo(code, "Atualizações Instaladas com Sucesso!",
-                      "Ocorreu um erro.")
+        code = os.system("winget upgrade --all")
+        validarCodigo(code, "Atualizações Instaladas com Sucesso!", "Ocorreu um erro.")
 
     if event == "Instalar Google Chrome":
         installApp("google.chrome")
