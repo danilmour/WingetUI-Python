@@ -25,7 +25,13 @@ python main.py
 
 ## Commands & config
 
-No build, test, lint, typecheck, or formatter commands. No CI, no pre-commit hooks. No `pyproject.toml` or `setup.py`.
+No build, test, typecheck, or formatter commands. No pre-commit hooks. No `pyproject.toml` or `setup.py`.
+
+### CI
+
+GitHub Actions workflow (`.github/workflows/validate.yml`) runs on push/PR to `main`:
+- `python -m py_compile main.py` — syntax check
+- `ruff check main.py` — linting
 
 ## UI language
 
